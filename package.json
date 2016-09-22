@@ -1,0 +1,54 @@
+{
+    "name": "asciidoctor-vscode-extension",
+    "displayName": "asciidoctor-vscode-extension",
+    "description": "An vscode extension for asciidoctor",
+    "version": "0.0.1",
+    "publisher": "danielgrycman",
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:extension.sayHello"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "languages": [
+            {
+                "id": "Asciidoctor",
+                "aliases": [
+                    "Asciidoc(tor)", "asciidoctor", "asciidoc"
+                ],
+                "extensions": [
+                    ".adoc",".ad",".asciidoc"
+                ],
+                "configuration": "./asciidoctor-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "Asciidoctor",
+                "scopeName": "text.asciidoctor",
+                "path": "./syntaxes/asciidoctor.tmLanguage"
+            }
+        ],
+        "commands": [{
+            "command": "extension.sayHello",
+            "title": "Hello World"
+        }]
+    },
+    "scripts": {
+        "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "devDependencies": {
+        "typescript": "^1.8.5",
+        "vscode": "^0.11.0"
+    },
+    "dependencies": {
+        "asciidoctor.js": ">= 1.5.5"
+    }
+}
