@@ -1,0 +1,76 @@
+{
+    ".source.Asciidoctor": {
+        "Title 1" : {
+            "prefix": "t1",
+            "body": "= ${1:title}"
+        },
+        "Title 2": {
+            "prefix": "t2",
+            "body": "== ${1:title}"
+        },
+        "Title 3": {
+            "prefix": "t3",
+            "body": "=== ${1:title}"
+        },
+        "Title 4": {
+            "prefix": "t4",
+            "body": "==== ${1:title}"
+        },
+        "Title 5": {
+            "prefix": "t5",
+            "body": "===== ${1:title}"
+        },
+        "Title 6": {
+            "prefix": "t6",
+            "body": "====== ${1:title}"
+        },
+        "Header with attributes": {
+            "prefix": "ha",
+            "body": "= ${1:title}\n${2:fullname} <${3:emailaddress}>\nv1.0, ${4:date}\n:toc:\n:imagesdir: assets/images\n:homepage: ${5:homepage}"
+        },
+        "Include file": {
+            "prefix": "incl",
+            "body": "include::${1:filename}.adoc[]"
+        },
+        "Horizontal rule": {
+            "prefix": "hr",
+            "body": "'''"
+        },
+        "Page break": {
+            "prefix": "pb",
+            "body": "<<<"
+        },
+        "List item": {
+            "prefix": "li",
+            "body": "* ${1:item}\n"
+        },
+        "Checklist": {
+            "prefix": "cl",
+            "body": "- x ${1:item}\n"
+        },
+        "Ordered list": {
+            "prefix": "ol",
+            "body": ". ${1:item}\n"
+        },
+        "Labeled list": {
+            "prefix": "ll",
+            "body": "${1:term}:: ${2:definition}\n"
+        },
+        "Q&A": {
+            "prefix": "qa",
+            "body": "[qanda]\n${1:question}::\n {2:answer}\n"
+        },
+        "External link with text": {
+            "prefix": "el",
+            "body": "http://${1:link}[${2:text}]"
+        },
+        "Relative link with text": {
+            "prefix": "rl",
+            "body": "link:${1:link}[${2:text}]"
+        },
+        "Image": {
+            "prefix": "im",
+            "body": "image::\"${1:filename}.jpg\""
+        }
+    }
+}
