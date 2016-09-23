@@ -1,17 +1,25 @@
 {
     "name": "asciidoctor-vscode-extension",
-    "displayName": "asciidoctor-vscode-extension",
+    "displayName": "Asciidoctor Extension",
     "description": "An vscode extension for asciidoctor",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "publisher": "danielgrycman",
     "engines": {
         "vscode": "^1.5.0"
+    },
+    "bugs": {
+        "url": "https://github.com/danielgrycman/asciidoctor-vscode-extension/issues"
+    },
+    "homepage": "https://github.com/danielgrycman/asciidoctor-vscode-extension/blob/master/README.md",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:danielgrycman/asciidoctor-vscode-extension.git"
     },
     "categories": [
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onCommand:Asciidoctor.preview"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -27,17 +35,41 @@
                 "configuration": "./asciidoctor-configuration.json"
             }
         ],
+        "snippets": [
+            {
+                "language": "Asciidoctor",
+                "path": "./snippets/Asciidoctor.json"
+            }
+        ],
+        "commands": [
+            {
+                "command": "Asciidoctor.preview",
+                "title": "Open Preview"
+            }
+        ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "when": "resourceLangId == Asciidoctor",
+                    "command": "Asciidoctor.preview",
+                    "group": "navigation"
+                }
+            ],
+            "editor/title": [
+                {
+                    "when": "resourceLangId == Asciidoctor",
+                    "command": "Asciidoctor.preview",
+                    "group": "navigation"
+                }
+            ]
+        },
         "grammars": [
             {
                 "language": "Asciidoctor",
-                "scopeName": "text.asciidoctor",
+                "scopeName": "source.asciidoctor",
                 "path": "./syntaxes/asciidoctor.tmLanguage"
             }
-        ],
-        "commands": [{
-            "command": "extension.sayHello",
-            "title": "Hello World"
-        }]
+        ]   
     },
     "scripts": {
         "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
@@ -46,9 +78,10 @@
     },
     "devDependencies": {
         "typescript": "^1.8.5",
-        "vscode": "^0.11.0"
+        "vscode": "^0.11.0",
+        "asciidoctor.js": "^1.5.5-2"
     },
     "dependencies": {
-        "asciidoctor.js": ">= 1.5.5"
+        "asciidoctor.js": "^1.5.5-2"
     }
 }
