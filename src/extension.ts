@@ -1,29 +1,38 @@
 'use strict';
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import * as path from 'path';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+ let previewUri: vscode.Uri
 
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
-    console.log('Congratulations, your extension "asciidoctor-vscode-extension" is now active!');
+ let asciidoctorCommand = vscode.commands.registerCommand('Asciidoctor.preview', (uri) => {
+     let resource = uri;
+     let viewColumn = getViewColumn();
+     if (!(resource instanceof vscode.Uri)) {
+         if (vscode.window.activeTextEditor) {
+             resource = vscode.window.activeTextEditor.document.uri;
+             viewColumn = vscode.window.activeTextEditor.viewColumn;
+         } else {
+             vscode.window.showInformationMessage("Open a Asciidoctor file first to show a preview.");
+             return
+         }
+     }
+     previewUri = resource.with({
+         scheme: "Asciidoctor-preview"
+     })
+     let title = `Preview '${path.basename(resource.fsPath)}''`;
+     return vscode.commands.executeCommand('vscode.previewHtml', previewUri, viewColumn, title).then((success) =>{}, (reason) => {
+         vscode.window.showErrorMessage(reason);
+     });
+ });
 
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with  registerCommand
-    // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
-        // The code you place here will be executed every time your command is executed
-
-        // Display a message box to the user
-        vscode.window.showInformationMessage('Hello World!');
-    });
-
-    context.subscriptions.push(disposable);
+ context.subscriptions.push(asciidoctorCommand);
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {
+}
+
+function getViewColumn() : vscode.ViewColumn {
+    const active = vscode.window.activeTextEditor;
+    return active ? active.viewColumn : vscode.ViewColumn.One;
 }
